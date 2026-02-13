@@ -1,44 +1,99 @@
-@import "tailwindcss";
-
-@theme {
-  --font-sans: 'Lato', sans-serif;
-  --font-serif: 'Playfair Display', serif;
-  --color-brand-pink: #E91E63;
-  --color-brand-dark: #1A1A1A;
-  --color-brand-light: #F5F5F5;
-  --color-brand-gold: #C5A059;
-}
+/* Global Styles */
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-pink: #e91e63;
+  --brand-pink-hover: #d81b60;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: var(--font-sans);
+  background-color: #f8f9fa;
+  /* Bootstrap bg-light equivalent */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Custom Utilities mimicking some Tailwind conveniences if needed, 
+   but we should aim to use Bootstrap classes */
+
+.text-brand-pink {
+  color: var(--brand-pink) !important;
+}
+
+.bg-brand-pink {
+  background-color: var(--brand-pink) !important;
+}
+
+.border-brand-pink {
+  border-color: var(--brand-pink) !important;
+}
+
+.hover\:text-brand-pink:hover {
+  color: var(--brand-pink) !important;
+}
+
+.hover\:bg-brand-pink:hover {
+  background-color: var(--brand-pink) !important;
+}
+
+/* Serif Font Class */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* No Scrollbar Utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Custom scrollbar for a premium feel */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 /* Hide scrollbar utility */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

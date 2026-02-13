@@ -102,35 +102,35 @@ export const OCCASIONS = [
         title: 'The Wedding Edit',
         subtitle: 'EXPLORE',
         image: SAFE_IMAGES[0],
-        className: 'md:col-span-1 md:row-span-2'
+        className: 'grid-tall'
     },
     {
         id: 2,
         title: 'Haldi & Mehendi',
         subtitle: 'SHOP YELLOWS & GREENS',
         image: SAFE_IMAGES[4], // Used white/bright for contrast
-        className: 'md:col-span-2 md:row-span-1'
+        className: 'grid-wide'
     },
     {
         id: 3,
         title: 'Cocktail Night',
         subtitle: 'SHOP GOWNS',
         image: SAFE_IMAGES[1],
-        className: 'md:col-span-1 md:row-span-1'
+        className: 'grid-standard'
     },
     {
         id: 4,
         title: 'Festive Ready',
         subtitle: 'SHOP SILKS',
         image: SAFE_IMAGES[2],
-        className: 'md:col-span-1 md:row-span-1'
+        className: 'grid-standard'
     },
     {
         id: 5,
         title: 'Casual Ethnic',
         subtitle: 'SHOP KURTIS & SUITS',
         image: SAFE_IMAGES[3],
-        className: 'md:col-span-2 md:row-span-1'
+        className: 'grid-wide'
     }
 ];
 

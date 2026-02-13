@@ -30,42 +30,44 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
             {/* Mobile Backdrop */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+                    className="position-fixed top-0 start-0 w-100 h-100 bg-black-50 z-3 d-lg-none"
                     onClick={onClose}
                 />
             )}
 
             {/* Sidebar Container */}
             <aside className={`
-                fixed inset-y-0 left-0 z-50 w-[280px] bg-white px-5 py-6 shadow-2xl overflow-y-auto
+                position-fixed top-0 start-0 bottom-0 z-3 bg-white px-4 py-4 shadow-lg overflow-auto
                 transition-transform duration-300 ease-in-out
-                lg:static lg:block lg:w-64 lg:p-0 lg:shadow-none lg:transform-none lg:translate-x-0
-                ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-            `}>
+                d-lg-block shadow-lg-none transform-none
+                ${isOpen ? 'translate-x-0' : '-translate-x-full lg-translate-x-0'}
+            `}
+                style={{ width: '280px', zIndex: 1045 }} // High z-index for mobile, standard for desktop handled by layout
+            >
 
                 {/* Mobile Header with Close Button */}
-                <div className="flex items-center justify-between mb-6 lg:hidden">
-                    <h2 className="text-lg font-serif font-bold text-gray-900">Filters</h2>
+                <div className="d-flex align-items-center justify-content-between mb-4 d-lg-none">
+                    <h2 className="h5 font-serif fw-bold text-dark mb-0">Filters</h2>
                     <button
                         onClick={onClose}
-                        className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                        className="btn btn-light rounded-circle p-2 d-flex align-items-center justify-content-center"
                     >
-                        <X className="w-5 h-5 text-gray-500" />
+                        <X size={20} className="text-secondary" />
                     </button>
                 </div>
 
-                <div className="space-y-8 lg:pr-4">
+                <div className="vstack gap-4 pe-lg-3">
                     {/* Category Filter */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('category')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Category</h3>
-                            {openSections.category ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Category</h3>
+                            {openSections.category ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.category && (
-                            <ul className="space-y-3">
+                            <ul className="list-unstyled vstack gap-2 mb-0">
                                 {[
                                     { label: 'Sarees', count: 120, checked: true },
                                     { label: 'Lehengas', count: 45, checked: false },
@@ -74,14 +76,16 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                                     { label: 'Gowns', count: 18, checked: false },
                                     { label: 'Dupattas', count: 25, checked: false },
                                 ].map((cat, idx) => (
-                                    <li key={idx} className="flex items-center justify-between group cursor-pointer">
-                                        <div className="flex items-center gap-3">
-                                            <div className={`w-4 h-4 border rounded-sm flex items-center justify-center transition-colors ${cat.checked ? 'bg-brand-pink border-brand-pink' : 'border-gray-300 group-hover:border-gray-400 bg-white'}`}>
-                                                {cat.checked && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+                                    <li key={idx} className="d-flex align-items-center justify-content-between group cursor-pointer">
+                                        <div className="d-flex align-items-center gap-2">
+                                            <div className={`border rounded-1 d-flex align-items-center justify-content-center transition-colors ${cat.checked ? 'bg-brand-pink border-brand-pink' : 'border-secondary-subtle bg-white'}`}
+                                                style={{ width: '16px', height: '16px' }}
+                                            >
+                                                {cat.checked && <Check size={10} className="text-white" strokeWidth={3} />}
                                             </div>
-                                            <span className={`text-xs ${cat.checked ? 'font-bold text-gray-900' : 'text-gray-600 group-hover:text-gray-900'}`}>{cat.label}</span>
+                                            <span className={`small ${cat.checked ? 'fw-bold text-dark' : 'text-secondary hover-text-dark'}`} style={{ fontSize: '0.8rem' }}>{cat.label}</span>
                                         </div>
-                                        <span className="text-[10px] text-gray-400 font-medium">({cat.count})</span>
+                                        <span className="small text-muted fw-medium" style={{ fontSize: '0.7rem' }}>({cat.count})</span>
                                     </li>
                                 ))}
                             </ul>
@@ -89,16 +93,16 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                     </div>
 
                     {/* Price Filter */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('price')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Price</h3>
-                            {openSections.price ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Price</h3>
+                            {openSections.price ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.price && (
-                            <ul className="space-y-3">
+                            <ul className="list-unstyled vstack gap-2 mb-0">
                                 {[
                                     'Below ₹1,000',
                                     '₹1,000 - ₹2,500',
@@ -106,9 +110,9 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                                     '₹5,000 - ₹10,000',
                                     'Above ₹10,000'
                                 ].map((price, idx) => (
-                                    <li key={idx} className="flex items-center gap-3 cursor-pointer group">
-                                        <div className="w-4 h-4 border border-gray-300 rounded-sm group-hover:border-gray-400 bg-white" />
-                                        <span className="text-xs text-gray-600 group-hover:text-gray-900">{price}</span>
+                                    <li key={idx} className="d-flex align-items-center gap-2 cursor-pointer group">
+                                        <div className="border border-secondary-subtle rounded-1 bg-white hover-border-dark" style={{ width: '16px', height: '16px' }} />
+                                        <span className="small text-secondary hover-text-dark" style={{ fontSize: '0.8rem' }}>{price}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -116,20 +120,20 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                     </div>
 
                     {/* Occasion Filter */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('occasion')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Occasion</h3>
-                            {openSections.occasion ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Occasion</h3>
+                            {openSections.occasion ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.occasion && (
-                            <ul className="space-y-3">
+                            <ul className="list-unstyled vstack gap-2 mb-0">
                                 {['Wedding', 'Party Wear', 'Festive', 'Casual / Daily', 'Work Wear', 'Haldi / Mehendi'].map((item, idx) => (
-                                    <li key={idx} className="flex items-center gap-3 cursor-pointer group">
-                                        <div className="w-4 h-4 border border-gray-300 rounded-sm group-hover:border-gray-400 bg-white" />
-                                        <span className="text-xs text-gray-600 group-hover:text-gray-900">{item}</span>
+                                    <li key={idx} className="d-flex align-items-center gap-2 cursor-pointer group">
+                                        <div className="border border-secondary-subtle rounded-1 bg-white hover-border-dark" style={{ width: '16px', height: '16px' }} />
+                                        <span className="small text-secondary hover-text-dark" style={{ fontSize: '0.8rem' }}>{item}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -137,20 +141,20 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                     </div>
 
                     {/* Fabric Filter */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('fabric')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Fabric</h3>
-                            {openSections.fabric ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Fabric</h3>
+                            {openSections.fabric ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.fabric && (
-                            <ul className="space-y-3">
+                            <ul className="list-unstyled vstack gap-2 mb-0">
                                 {['Banarasi Silk', 'Georgette', 'Chiffon', 'Cotton', 'Organza', 'Velvet', 'Net'].map((item, idx) => (
-                                    <li key={idx} className="flex items-center gap-3 cursor-pointer group">
-                                        <div className="w-4 h-4 border border-gray-300 rounded-sm group-hover:border-gray-400 bg-white" />
-                                        <span className="text-xs text-gray-600 group-hover:text-gray-900">{item}</span>
+                                    <li key={idx} className="d-flex align-items-center gap-2 cursor-pointer group">
+                                        <div className="border border-secondary-subtle rounded-1 bg-white hover-border-dark" style={{ width: '16px', height: '16px' }} />
+                                        <span className="small text-secondary hover-text-dark" style={{ fontSize: '0.8rem' }}>{item}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -158,20 +162,20 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                     </div>
 
                     {/* Work & Pattern */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('work')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Work & Pattern</h3>
-                            {openSections.work ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Work & Pattern</h3>
+                            {openSections.work ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.work && (
-                            <ul className="space-y-3">
+                            <ul className="list-unstyled vstack gap-2 mb-0">
                                 {['Embroidered', 'Zari Work', 'Printed', 'Stone Work', 'Mirror Work', 'Handwoven'].map((item, idx) => (
-                                    <li key={idx} className="flex items-center gap-3 cursor-pointer group">
-                                        <div className="w-4 h-4 border border-gray-300 rounded-sm group-hover:border-gray-400 bg-white" />
-                                        <span className="text-xs text-gray-600 group-hover:text-gray-900">{item}</span>
+                                    <li key={idx} className="d-flex align-items-center gap-2 cursor-pointer group">
+                                        <div className="border border-secondary-subtle rounded-1 bg-white hover-border-dark" style={{ width: '16px', height: '16px' }} />
+                                        <span className="small text-secondary hover-text-dark" style={{ fontSize: '0.8rem' }}>{item}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -179,18 +183,18 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                     </div>
 
                     {/* Size Filter */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('size')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Size</h3>
-                            {openSections.size ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Size</h3>
+                            {openSections.size ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.size && (
-                            <div className="flex flex-wrap gap-2">
+                            <div className="d-flex flex-wrap gap-2">
                                 {['XS', 'S', 'M', 'L', 'XL', 'XXL', 'Free Size'].map((size, idx) => (
-                                    <button key={idx} className="border border-gray-200 px-3 py-1 text-xs text-gray-600 hover:border-gray-900 hover:text-gray-900 transition-colors">
+                                    <button key={idx} className="btn btn-outline-light text-secondary border-secondary-subtle btn-sm hover-text-dark hover-border-dark">
                                         {size}
                                     </button>
                                 ))}
@@ -199,42 +203,46 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
                     </div>
 
                     {/* Color Filter */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('color')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Color</h3>
-                            {openSections.color ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Color</h3>
+                            {openSections.color ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.color && (
-                            <div className="flex flex-wrap gap-3">
+                            <div className="d-flex flex-wrap gap-3">
                                 {[
-                                    'bg-pink-500', 'bg-red-500', 'bg-yellow-400', 'bg-green-500',
-                                    'bg-blue-500', 'bg-black', 'bg-white border border-gray-200',
-                                    'bg-purple-600', 'bg-orange-500', 'bg-amber-800'
-                                ].map((colorClass, idx) => (
-                                    <div key={idx} className={`w-6 h-6 rounded-full cursor-pointer hover:scale-110 transition-transform ${colorClass}`}></div>
+                                    '#ec4899', '#ef4444', '#facc15', '#22c55e',
+                                    '#3b82f6', '#000000', '#ffffff',
+                                    '#9333ea', '#f97316', '#92400e'
+                                ].map((color, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="rounded-circle cursor-pointer hover-scale-110 transition-transform border border-secondary-subtle"
+                                        style={{ width: '24px', height: '24px', backgroundColor: color }}
+                                    ></div>
                                 ))}
                             </div>
                         )}
                     </div>
 
                     {/* Discount Filter */}
-                    <div className="border-b border-gray-100 pb-6">
+                    <div className="border-bottom pb-4">
                         <div
-                            className="flex items-center justify-between mb-4 cursor-pointer"
+                            className="d-flex align-items-center justify-content-between cursor-pointer mb-3"
                             onClick={() => toggleSection('discount')}
                         >
-                            <h3 className="font-bold text-xs uppercase tracking-widest text-gray-900">Discount</h3>
-                            {openSections.discount ? <Minus className="w-3 h-3 text-gray-400" /> : <Plus className="w-3 h-3 text-gray-400" />}
+                            <h3 className="small fw-bold text-uppercase tracking-widest text-dark mb-0" style={{ fontSize: '0.75rem' }}>Discount</h3>
+                            {openSections.discount ? <Minus size={14} className="text-secondary" /> : <Plus size={14} className="text-secondary" />}
                         </div>
                         {openSections.discount && (
-                            <ul className="space-y-3">
+                            <ul className="list-unstyled vstack gap-2 mb-0">
                                 {['10% and above', '30% and above', '50% and above'].map((item, idx) => (
-                                    <li key={idx} className="flex items-center gap-3 cursor-pointer group">
-                                        <div className="w-4 h-4 border border-gray-300 rounded-sm group-hover:border-gray-400 bg-white" />
-                                        <span className="text-xs text-gray-600 group-hover:text-gray-900">{item}</span>
+                                    <li key={idx} className="d-flex align-items-center gap-2 cursor-pointer group">
+                                        <div className="border border-secondary-subtle rounded-1 bg-white hover-border-dark" style={{ width: '16px', height: '16px' }} />
+                                        <span className="small text-secondary hover-text-dark" style={{ fontSize: '0.8rem' }}>{item}</span>
                                     </li>
                                 ))}
                             </ul>

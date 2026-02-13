@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Heart, Trash2, Truck, Tag, ShieldCheck, RotateCcw, CheckCircle } from 'lucide-react';
+import { Heart, Trash2, Truck, Tag, ShieldCheck, RotateCcw } from 'lucide-react';
 
 // Mock Data matching the image
 const CART_ITEMS = [
@@ -45,151 +45,154 @@ export default function CartPage() {
     const totalAmount = totalSellingPrice + shippingFee;
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8">
-            <div className="container mx-auto px-4 max-w-6xl">
+        <div className="min-vh-100 bg-light py-5">
+            <div className="container" style={{ maxWidth: '1140px' }}>
 
                 {/* Page Title */}
-                <h1 className="text-2xl font-sans font-medium text-gray-900 mb-6">
-                    Shopping <span className="font-bold">Bag</span> <span className="text-gray-500 text-lg font-normal">({CART_ITEMS.length} Items)</span>
+                <h1 className="h4 font-sans fw-medium text-dark mb-4">
+                    Shopping <span className="fw-bold">Bag</span> <span className="text-secondary fs-6 fw-normal">({CART_ITEMS.length} Items)</span>
                 </h1>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="row g-4">
 
                     {/* LEFT COLUMN - CART ITEMS */}
-                    <div className="lg:col-span-8 space-y-4">
+                    <div className="col-12 col-lg-8">
+                        <div className="vstack gap-3">
 
-                        {/* Savings Message */}
-                        <div className="bg-green-100 border border-green-200 rounded-sm p-3 flex items-center justify-center lg:justify-start gap-2 text-green-800 text-sm font-medium">
-                            <Tag className="w-4 h-4" />
-                            <span>Congratulations! You've saved ₹{totalDiscount.toLocaleString()} on this order.</span>
-                        </div>
+                            {/* Savings Message */}
+                            <div className="alert alert-success d-flex align-items-center gap-2 small border-success-subtle mb-0 py-2">
+                                <Tag size={16} />
+                                <span>Congratulations! You've saved ₹{totalDiscount.toLocaleString()} on this order.</span>
+                            </div>
 
-                        {/* Cart Items List */}
-                        <div className="space-y-4">
-                            {CART_ITEMS.map((item) => (
-                                <div key={item.id} className="bg-white border border-gray-100 rounded-sm p-4 flex flex-col sm:flex-row gap-4 relative hover:shadow-sm transition-shadow">
+                            {/* Cart Items List */}
+                            <div className="vstack gap-3">
+                                {CART_ITEMS.map((item) => (
+                                    <div key={item.id} className="card border-0 shadow-sm p-3 d-flex flex-column flex-sm-row gap-3">
 
-                                    {/* Image */}
-                                    <div className="w-full sm:w-32 aspect-[3/4] flex-shrink-0 bg-gray-100 rounded-sm overflow-hidden">
-                                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                                    </div>
+                                        {/* Image */}
+                                        <div className="flex-shrink-0 bg-light rounded overflow-hidden position-relative" style={{ width: '120px', aspectRatio: '3/4' }}>
+                                            <img src={item.image} alt={item.title} className="w-100 h-100 object-fit-cover" />
+                                        </div>
 
-                                    {/* Details */}
-                                    <div className="flex-1 flex flex-col justify-between">
-                                        <div>
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">{item.brand}</h3>
-                                                    <h2 className="text-base font-medium text-gray-800 mb-2 leading-tight">{item.title}</h2>
+                                        {/* Details */}
+                                        <div className="flex-grow-1 d-flex flex-column justify-content-between">
+                                            <div>
+                                                <div className="d-flex justify-content-between align-items-start">
+                                                    <div>
+                                                        <h3 className="small fw-bold text-muted text-uppercase tracking-widest mb-1" style={{ fontSize: '0.75rem' }}>{item.brand}</h3>
+                                                        <h2 className="h6 fw-bold text-dark mb-2">{item.title}</h2>
+                                                    </div>
+                                                    {/* Delivery Info (Desktop) */}
+                                                    <div className="d-none d-sm-flex align-items-center gap-1 small text-success bg-success-subtle px-2 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}>
+                                                        <Truck size={14} />
+                                                        <span>Delivers by {item.deliveryDate}</span>
+                                                    </div>
                                                 </div>
-                                                {/* Delivery Info (Desktop) */}
-                                                <div className="hidden sm:flex items-center gap-1.5 text-green-600 text-xs font-medium bg-green-50 px-2 py-1 rounded-full">
-                                                    <Truck className="w-3.5 h-3.5" />
-                                                    <span>Delivers by {item.deliveryDate}</span>
+
+                                                {/* Size & Qty Selectors */}
+                                                <div className="d-flex align-items-center gap-3 mb-3">
+                                                    <div className="badge bg-light text-secondary border fw-normal p-2 cursor-pointer hover-border-dark">
+                                                        Size: <span className="fw-bold text-dark">{item.size}</span>
+                                                    </div>
+                                                    <div className="badge bg-light text-secondary border fw-normal p-2 cursor-pointer hover-border-dark">
+                                                        Qty: <span className="fw-bold text-dark">{item.qty}</span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Price */}
+                                                <div className="d-flex align-items-baseline gap-2 mb-3">
+                                                    <span className="fs-5 fw-bold text-dark">₹{item.price.toLocaleString()}</span>
+                                                    <span className="small text-muted text-decoration-line-through">₹{item.originalPrice.toLocaleString()}</span>
+                                                    <span className="small fw-bold text-brand-pink">{item.discount}</span>
                                                 </div>
                                             </div>
 
-                                            {/* Size & Qty Selectors */}
-                                            <div className="flex items-center gap-4 mb-3">
-                                                <div className="bg-gray-50 px-2 py-1 rounded text-xs text-gray-600 border border-gray-200 cursor-pointer hover:border-gray-300">
-                                                    Size: <span className="font-medium text-gray-900">{item.size}</span>
-                                                </div>
-                                                <div className="bg-gray-50 px-2 py-1 rounded text-xs text-gray-600 border border-gray-200 cursor-pointer hover:border-gray-300">
-                                                    Qty: <span className="font-medium text-gray-900">{item.qty}</span>
-                                                </div>
-                                            </div>
-
-                                            {/* Price */}
-                                            <div className="flex items-baseline gap-2 mb-4">
-                                                <span className="text-lg font-bold text-gray-900">₹{item.price.toLocaleString()}</span>
-                                                <span className="text-sm text-gray-400 line-through">₹{item.originalPrice.toLocaleString()}</span>
-                                                <span className="text-xs font-bold text-brand-pink">{item.discount}</span>
+                                            {/* Actions */}
+                                            <div className="d-flex align-items-center gap-4 border-top border-dashed pt-3 mt-auto">
+                                                <button className="btn btn-link p-0 text-secondary text-decoration-none small fw-bold text-uppercase d-flex align-items-center gap-1 hover-text-danger">
+                                                    <Trash2 size={14} />
+                                                    Remove
+                                                </button>
+                                                <div className="vr text-secondary opacity-25"></div>
+                                                <button className="btn btn-link p-0 text-secondary text-decoration-none small fw-bold text-uppercase d-flex align-items-center gap-1 hover-text-brand-pink">
+                                                    <Heart size={14} />
+                                                    Move to Wishlist
+                                                </button>
                                             </div>
                                         </div>
 
-                                        {/* Actions */}
-                                        <div className="flex items-center gap-4 md:gap-6 border-t border-dashed border-gray-100 pt-3 mt-auto">
-                                            <button className="flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-red-500 transition-colors uppercase tracking-wide">
-                                                <Trash2 className="w-3.5 h-3.5" />
-                                                Remove
-                                            </button>
-                                            <div className="h-3 w-px bg-gray-200"></div>
-                                            <button className="flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-brand-pink transition-colors uppercase tracking-wide">
-                                                <Heart className="w-3.5 h-3.5" />
-                                                Move to Wishlist
-                                            </button>
+                                        {/* Mobile Delivery Info */}
+                                        <div className="d-sm-none position-absolute top-0 end-0 m-3 small text-success fw-medium" style={{ fontSize: '0.75rem' }}>
+                                            By {item.deliveryDate}
                                         </div>
                                     </div>
-
-                                    {/* Mobile Delivery Info */}
-                                    <div className="sm:hidden absolute top-4 right-4 items-center gap-1 text-green-600 text-xs font-medium">
-                                        <span>By {item.deliveryDate}</span>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
 
                     {/* RIGHT COLUMN - SUMMARY */}
-                    <div className="lg:col-span-4">
-                        <div className="bg-white border border-gray-100 rounded-sm p-5 sticky top-24">
+                    <div className="col-12 col-lg-4">
+                        <div className="card border-0 shadow-sm p-4 sticky-top" style={{ top: '100px', zIndex: 1020 }}>
 
-                            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">Coupons</h3>
+                            <h3 className="small fw-bold text-muted text-uppercase tracking-widest mb-3" style={{ fontSize: '0.75rem' }}>Coupons</h3>
 
                             {/* Coupon Input */}
-                            <div className="flex gap-2 mb-8">
+                            <div className="input-group mb-4">
                                 <input
                                     type="text"
                                     placeholder="Enter Coupon Code"
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
-                                    className="flex-1 border border-gray-200 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink"
+                                    className="form-control border-secondary-subtle focus-ring-brand-pink"
+                                    style={{ fontSize: '0.875rem' }}
                                 />
-                                <button className="text-brand-pink font-bold text-sm px-3 hover:bg-pink-50 rounded-sm transition-colors">
+                                <button className="btn btn-outline-secondary text-brand-pink fw-bold small hover-bg-pink-50 border-start-0" type="button">
                                     APPLY
                                 </button>
                             </div>
 
-                            <div className="border-t border-gray-100 pt-6 mb-6">
-                                <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">Price Details</h3>
+                            <div className="border-top pt-4 mb-4">
+                                <h3 className="small fw-bold text-muted text-uppercase tracking-widest mb-3" style={{ fontSize: '0.75rem' }}>Price Details</h3>
 
-                                <div className="space-y-3 text-sm text-gray-600">
-                                    <div className="flex justify-between">
+                                <div className="vstack gap-2 small text-secondary">
+                                    <div className="d-flex justify-content-between">
                                         <span>Bag Total ({CART_ITEMS.length} items)</span>
                                         <span>₹{totalMRP.toLocaleString()}</span>
                                     </div>
-                                    <div className="flex justify-between text-green-600">
+                                    <div className="d-flex justify-content-between text-success">
                                         <span>Bag Discount</span>
                                         <span>- ₹{totalDiscount.toLocaleString()}</span>
                                     </div>
-                                    <div className="flex justify-between">
+                                    <div className="d-flex justify-content-between">
                                         <span>Shipping</span>
-                                        <span className="text-green-600 font-medium">FREE</span>
+                                        <span className="text-success fw-bold">FREE</span>
                                     </div>
                                 </div>
 
-                                <div className="border-t border-gray-100 my-4"></div>
+                                <hr className="my-3 text-secondary opacity-25" />
 
-                                <div className="flex justify-between items-end mb-6">
-                                    <span className="text-base font-bold text-gray-900">Total Payable</span>
-                                    <span className="text-xl font-bold text-gray-900">₹{totalAmount.toLocaleString()}</span>
+                                <div className="d-flex justify-content-between align-items-end mb-4">
+                                    <span className="fw-bold text-dark">Total Payable</span>
+                                    <span className="h5 fw-bold text-dark mb-0">₹{totalAmount.toLocaleString()}</span>
                                 </div>
 
-                                <button className="w-full bg-[#9d174d] text-white font-bold py-3.5 rounded-sm shadow-md shadow-pink-200 hover:bg-[#83113f] transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-sm tracking-widest uppercase">
+                                <button className="btn btn-primary bg-brand-pink border-0 w-100 py-3 fw-bold text-uppercase tracking-widest shadow hover-scale-105 active-scale-100 transition-transform">
                                     Proceed to Checkout
                                 </button>
                             </div>
 
                             {/* Trust Badges */}
-                            <div className="flex justify-center gap-6 pt-2">
-                                <div className="flex flex-col items-center gap-1 text-gray-400">
-                                    <ShieldCheck className="w-5 h-5" />
+                            <div className="d-flex justify-content-center gap-4 pt-2 text-muted opacity-75">
+                                <div className="d-flex flex-column align-items-center gap-1">
+                                    <ShieldCheck size={20} />
                                 </div>
-                                <div className="flex flex-col items-center gap-1 text-gray-400">
-                                    <RotateCcw className="w-5 h-5" />
+                                <div className="d-flex flex-column align-items-center gap-1">
+                                    <RotateCcw size={20} />
                                 </div>
-                                <div className="flex flex-col items-center gap-1 text-gray-400">
-                                    <Tag className="w-5 h-5" />
+                                <div className="d-flex flex-column align-items-center gap-1">
+                                    <Tag size={20} />
                                 </div>
                             </div>
                         </div>

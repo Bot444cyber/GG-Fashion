@@ -23,11 +23,11 @@ const ReviewsAndFeatures: React.FC = () => {
 
     const getIcon = (name: string) => {
         switch (name) {
-            case 'award': return <Award className="w-8 h-8 text-brand-pink stroke-1" />;
-            case 'sparkles': return <Sparkles className="w-8 h-8 text-brand-pink stroke-1" />;
-            case 'truck': return <Truck className="w-8 h-8 text-brand-pink stroke-1" />;
-            case 'repeat': return <RefreshCw className="w-8 h-8 text-brand-pink stroke-1" />;
-            case 'lock': return <Lock className="w-8 h-8 text-brand-pink stroke-1" />;
+            case 'award': return <Award className="text-brand-pink" size={32} strokeWidth={1} />;
+            case 'sparkles': return <Sparkles className="text-brand-pink" size={32} strokeWidth={1} />;
+            case 'truck': return <Truck className="text-brand-pink" size={32} strokeWidth={1} />;
+            case 'repeat': return <RefreshCw className="text-brand-pink" size={32} strokeWidth={1} />;
+            case 'lock': return <Lock className="text-brand-pink" size={32} strokeWidth={1} />;
             default: return null;
         }
     };
@@ -35,63 +35,68 @@ const ReviewsAndFeatures: React.FC = () => {
     return (
         <section className="bg-white">
             {/* Reviews Section */}
-            <div className="py-20 border-b border-gray-100">
-                <div className="container mx-auto px-4">
+            <div className="py-5 border-bottom">
+                <div className="container">
 
                     {/* Header */}
-                    <div className="flex flex-row items-center justify-between mb-8 md:mb-12">
-                        <h3 className="font-sans text-2xl md:text-3xl lg:text-4xl text-gray-800">
-                            Reviews & <span className="text-brand-pink font-bold">Ratings</span>
+                    <div className="d-flex align-items-center justify-content-between mb-4">
+                        <h3 className="h3 font-sans text-dark mb-0">
+                            Reviews & <span className="text-brand-pink fw-bold">Ratings</span>
                         </h3>
                         <Link
                             href="/products"
-                            className="border border-gray-200 bg-gray-50 px-4 py-2 rounded-full text-[10px] md:text-xs font-bold text-gray-900 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all uppercase tracking-widest whitespace-nowrap"
+                            className="btn btn-light border rounded-pill px-4 py-2 small fw-bold text-uppercase text-nowrap text-dark hover-bg-brand-pink hover-text-white transition-all"
+                            style={{ fontSize: '0.75rem', letterSpacing: '1px' }}
                         >
                             View All
                         </Link>
                     </div>
 
                     {/* Carousel Container */}
-                    <div className="relative group">
+                    <div className="position-relative group">
 
                         {/* Left Navigation Button */}
                         <button
                             onClick={() => scroll('left')}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 md:-translate-x-6 z-20 w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition-all duration-300 shadow-sm opacity-0 group-hover:opacity-100"
+                            className="btn btn-light rounded-circle shadow position-absolute start-0 top-50 translate-middle-y z-10 d-none d-md-flex align-items-center justify-content-center opacity-0 group-hover-opacity-100 transition-opacity duration-300 ms-n3"
+                            style={{ width: '48px', height: '48px' }}
                             aria-label="Previous reviews"
                         >
-                            <ChevronLeft className="w-6 h-6" />
+                            <ChevronLeft size={24} />
                         </button>
 
                         {/* Review Cards Row */}
                         <div
                             ref={scrollRef}
-                            className="flex gap-6 overflow-x-auto pb-8 pt-2 px-1 snap-x snap-mandatory no-scrollbar"
+                            className="d-flex gap-4 overflow-auto pb-4 pt-2 px-1 scroll-smooth no-scrollbar"
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                         >
                             {REVIEWS.map((review) => (
                                 <div
                                     key={review.id}
-                                    className="flex-none w-[300px] md:w-[350px] snap-start bg-white border border-gray-100 rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+                                    className="flex-shrink-0 bg-white border rounded p-4 shadow-sm hover-shadow transition-all duration-300"
+                                    style={{ width: '320px' }}
                                 >
-                                    <div className="flex items-center gap-1 mb-4">
-                                        <span className="text-lg font-bold text-gray-900 mr-2">{review.rating.toFixed(1)}</span>
+                                    <div className="d-flex align-items-center gap-1 mb-3">
+                                        <span className="fs-5 fw-bold text-dark me-2">{review.rating.toFixed(1)}</span>
                                         {[...Array(5)].map((_, i) => (
-                                            <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                                            <Star key={i} size={16} className="text-warning fill-warning" />
                                         ))}
                                     </div>
 
-                                    <p className="text-gray-600 text-sm leading-relaxed mb-6 italic h-[80px] overflow-hidden">
+                                    <p className="text-muted small mb-4 fst-italic overflow-hidden" style={{ height: '80px', lineHeight: '1.6' }}>
                                         {review.text}
                                     </p>
 
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-lg font-bold uppercase">
+                                    <div className="d-flex align-items-center gap-3">
+                                        <div className="rounded-circle bg-light d-flex align-items-center justify-content-center text-secondary fw-bold text-uppercase"
+                                            style={{ width: '48px', height: '48px', fontSize: '1.25rem' }}
+                                        >
                                             {review.author.charAt(0)}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-gray-900 text-sm">{review.author}</h4>
-                                            <p className="text-xs text-gray-500">{review.location}</p>
+                                            <h4 className="h6 fw-bold text-dark mb-0">{review.author}</h4>
+                                            <p className="small text-muted mb-0" style={{ fontSize: '0.75rem' }}>{review.location}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -101,10 +106,11 @@ const ReviewsAndFeatures: React.FC = () => {
                         {/* Right Navigation Button */}
                         <button
                             onClick={() => scroll('right')}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 md:translate-x-6 z-20 w-12 h-12 bg-brand-pink rounded-full flex items-center justify-center text-white shadow-lg shadow-pink-200 hover:bg-pink-600 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                            className="btn btn-primary bg-brand-pink border-0 rounded-circle shadow position-absolute end-0 top-50 translate-middle-y z-10 d-none d-md-flex align-items-center justify-content-center opacity-0 group-hover-opacity-100 transition-opacity duration-300 me-n3 hover-scale-110"
+                            style={{ width: '48px', height: '48px' }}
                             aria-label="Next reviews"
                         >
-                            <ChevronRight className="w-6 h-6" />
+                            <ChevronRight size={24} />
                         </button>
 
                     </div>
@@ -112,18 +118,20 @@ const ReviewsAndFeatures: React.FC = () => {
             </div>
 
             {/* Service Features Section */}
-            <div className="py-20 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-dashed divide-gray-200">
+            <div className="py-5 bg-white">
+                <div className="container">
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-5 g-4 py-4">
                         {SERVICE_FEATURES.map((feature) => (
-                            <div key={feature.id} className="flex flex-col items-center text-center px-4 pt-8 sm:pt-0 group">
-                                <div className="w-16 h-16 rounded-full bg-pink-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <div key={feature.id} className="col d-flex flex-column align-items-center text-center group">
+                                <div className="rounded-circle d-flex align-items-center justify-content-center mb-3 transition-transform duration-300 group-hover-scale-110"
+                                    style={{ width: '64px', height: '64px', backgroundColor: '#fce4ec' }} // Light pink bg
+                                >
                                     {getIcon(feature.icon)}
                                 </div>
-                                <h4 className="font-bold text-xs md:text-sm text-gray-900 uppercase tracking-widest mb-3">
+                                <h4 className="small fw-bold text-dark text-uppercase tracking-widest mb-2" style={{ fontSize: '0.75rem' }}>
                                     {feature.title}
                                 </h4>
-                                <p className="text-xs text-gray-500 leading-relaxed max-w-[200px]">
+                                <p className="text-muted small mb-0" style={{ maxWidth: '200px', fontSize: '0.75rem' }}>
                                     {feature.description}
                                 </p>
                             </div>

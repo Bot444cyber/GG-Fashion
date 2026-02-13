@@ -16,73 +16,78 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+        <header className="sticky-top bg-white border-bottom shadow-sm">
             {/* Upper Header: Logo, Search, Icons */}
-            <div className="container mx-auto px-4 py-4 md:py-5">
-                <div className="flex items-center justify-between gap-4 md:gap-8">
+            <div className="container py-3">
+                <div className="d-flex align-items-center justify-content-between gap-3">
 
                     {/* Logo Section */}
-                    <Link href="/" className="flex-shrink-0 flex items-center gap-2 group">
-                        <div className="border-2 border-gray-800 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-serif font-bold text-lg md:text-xl text-gray-800 group-hover:bg-gray-800 group-hover:text-white transition-colors">
+                    <Link href="/" className="text-decoration-none text-dark d-flex align-items-center gap-2 group">
+                        <div
+                            className="border border-2 border-dark rounded-circle d-flex align-items-center justify-content-center fw-bold fs-5 text-dark"
+                            style={{ width: '45px', height: '45px' }}
+                        >
                             GG
                         </div>
-                        <div className="hidden md:block">
-                            <h1 className="text-xl md:text-2xl font-bold font-sans tracking-tight leading-none text-gray-900">GG Fashion</h1>
-                            <p className="text-[10px] text-gray-500 tracking-wide">!!Your Fashion, Our Passion!!</p>
+                        <div className="d-none d-md-block">
+                            <h1 className="h5 fw-bold mb-0 font-sans tracking-tight text-dark">GG Fashion</h1>
+                            <p className="small text-muted mb-0" style={{ fontSize: '10px', letterSpacing: '1px' }}>!!Your Fashion, Our Passion!!</p>
                         </div>
                     </Link>
 
                     {/* Search Bar - Hidden on small mobile, visible on larger */}
-                    <div className="hidden md:flex flex-1 max-w-xl relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <Search className="h-5 w-5 text-gray-400" />
+                    <div className="d-none d-md-block flex-grow-1 position-relative mx-4" style={{ maxWidth: '600px' }}>
+                        <div className="position-absolute top-50 start-0 translate-middle-y ps-3 pointer-events-none">
+                            <Search className="text-muted" size={18} />
                         </div>
                         <input
                             type="text"
                             onKeyDown={handleSearch}
-                            className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-full leading-5 bg-gray-100 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-1 focus:ring-brand-pink focus:border-brand-pink sm:text-sm transition-all duration-300"
+                            className="form-control rounded-pill bg-light border-secondary-subtle ps-5 py-2"
                             placeholder="Search for products, brands and more"
+                            style={{ fontSize: '0.9rem' }}
                         />
                     </div>
 
                     {/* Icons Section */}
-                    <div className="flex items-center gap-4 md:gap-6">
+                    <div className="d-flex align-items-center gap-3 gap-md-4">
                         {/* Mobile Search Icon */}
-                        <button onClick={() => router.push('/products')} className="md:hidden text-gray-700 hover:text-brand-pink">
-                            <Search className="h-6 w-6" />
+                        <button onClick={() => router.push('/products')} className="btn btn-link text-dark p-0 d-md-none border-0">
+                            <Search size={24} />
                         </button>
 
-                        <button className="text-gray-700 hover:text-brand-pink transition-colors group flex flex-col items-center gap-1">
-                            <Heart className="h-6 w-6 group-hover:fill-brand-pink/10" />
+                        <button className="btn btn-link text-dark p-0 border-0 d-flex flex-col align-items-center">
+                            <Heart size={24} />
                         </button>
 
-                        <button className="text-gray-700 hover:text-brand-pink transition-colors flex flex-col items-center gap-1">
-                            <User className="h-6 w-6" />
+                        <button className="btn btn-link text-dark p-0 border-0 d-flex flex-col align-items-center">
+                            <User size={24} />
                         </button>
 
-                        <Link href="/cart" className="text-gray-700 hover:text-brand-pink transition-colors relative flex flex-col items-center gap-1">
-                            <ShoppingBag className="h-6 w-6" />
-                            <span className="absolute -top-1 -right-1 bg-brand-pink text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                        <Link href="/cart" className="btn btn-link text-dark p-0 border-0 position-relative d-flex flex-col align-items-center">
+                            <ShoppingBag size={24} />
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-brand-pink text-white" style={{ fontSize: '10px', padding: '0.25em 0.4em' }}>
                                 1
                             </span>
                         </Link>
 
-                        <button className="md:hidden text-gray-700">
-                            <Menu className="h-6 w-6" />
+                        <button className="btn btn-link text-dark p-0 d-md-none border-0">
+                            <Menu size={24} />
                         </button>
                     </div>
                 </div>
             </div>
 
             {/* Navigation Links - Desktop */}
-            <nav className="hidden md:block border-t border-gray-100">
-                <div className="container mx-auto px-4">
-                    <ul className="flex items-center justify-center gap-8 py-3 overflow-x-auto no-scrollbar">
+            <nav className="d-none d-md-block border-top">
+                <div className="container">
+                    <ul className="nav justify-content-center py-2 flex-nowrap overflow-auto no-scrollbar gap-4">
                         {NAV_ITEMS.map((item, index) => (
-                            <li key={index} className="flex-shrink-0">
+                            <li key={index} className="nav-item">
                                 <Link
                                     href={item.href}
-                                    className={`text-sm font-medium tracking-wide uppercase hover:text-brand-pink transition-colors duration-200 ${item.isHighlight ? 'text-brand-pink font-bold' : 'text-gray-700'}`}
+                                    className={`nav-link text-uppercase fw-medium px-0 ${item.isHighlight ? 'text-brand-pink fw-bold' : 'text-secondary'} hover-text-brand-pink`}
+                                    style={{ fontSize: '0.9rem', letterSpacing: '0.5px' }}
                                 >
                                     {item.label}
                                 </Link>

@@ -3,54 +3,52 @@ import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, Twitter } from 'luci
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-gray-50 pt-16 pb-8 border-t border-gray-100 font-sans text-gray-600">
-            <div className="container mx-auto px-4">
+        <footer className="bg-light pt-5 pb-4 border-top font-sans text-secondary">
+            <div className="container">
 
                 {/* Main Footer Content */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
+                <div className="row g-4 g-lg-5 mb-5">
 
                     {/* Column 1: About */}
-                    <div className="space-y-6">
-                        <h4 className="text-gray-900 font-bold text-sm tracking-widest uppercase">About GG Fashion</h4>
-                        <p className="text-sm leading-relaxed text-gray-500 text-justify">
+                    <div className="col-12 col-md-6 col-lg-3">
+                        <h4 className="text-dark fw-bold small text-uppercase tracking-widest mb-3">About GG Fashion</h4>
+                        <p className="small text-secondary text-justify lh-base">
                             Your destination for premium ethnic wear. We blend traditional craftsmanship with modern silhouettes to bring you the finest Sarees, Lehengas, and Suits.
                         </p>
 
                         {/* Social Icons */}
-                        <div className="flex gap-4">
-                            <a href="#" className="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all duration-300 shadow-sm">
-                                <Facebook className="w-4 h-4 fill-current" />
-                            </a>
-                            <a href="#" className="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all duration-300 shadow-sm">
-                                <Instagram className="w-4 h-4" />
-                            </a>
-                            <a href="#" className="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all duration-300 shadow-sm">
-                                <Twitter className="w-4 h-4 fill-current" />
-                            </a>
-                            <a href="#" className="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all duration-300 shadow-sm">
-                                <Youtube className="w-4 h-4 fill-current" />
-                            </a>
+                        <div className="d-flex gap-3 mt-4">
+                            {[Facebook, Instagram, Twitter, Youtube].map((Icon, idx) => (
+                                <a
+                                    key={idx}
+                                    href="#"
+                                    className="btn btn-white border rounded-circle d-flex align-items-center justify-content-center p-0 shadow-sm text-secondary hover-bg-brand-pink hover-text-white transition-all"
+                                    style={{ width: '36px', height: '36px' }}
+                                >
+                                    <Icon size={16} />
+                                </a>
+                            ))}
                         </div>
 
                         {/* Payment Methods */}
                         <div className="pt-4">
-                            <h4 className="text-gray-900 font-bold text-xs tracking-widest uppercase mb-4">We Accept</h4>
-                            <div className="flex gap-3 items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
-                                <img src="https://cdn-icons-png.flaticon.com/128/349/349221.png" alt="Visa" className="h-6 object-contain" />
-                                <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="Mastercard" className="h-6 object-contain" />
-                                <img src="https://cdn-icons-png.flaticon.com/128/174/174861.png" alt="PayPal" className="h-6 object-contain" />
-                                <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="Amex" className="h-6 object-contain" />
+                            <h4 className="text-dark fw-bold small text-uppercase tracking-widest mb-3">We Accept</h4>
+                            <div className="d-flex gap-3 align-items-center opacity-75">
+                                <img src="https://cdn-icons-png.flaticon.com/128/349/349221.png" alt="Visa" style={{ height: '24px', objectFit: 'contain' }} />
+                                <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="Mastercard" style={{ height: '24px', objectFit: 'contain' }} />
+                                <img src="https://cdn-icons-png.flaticon.com/128/174/174861.png" alt="PayPal" style={{ height: '24px', objectFit: 'contain' }} />
+                                <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="Amex" style={{ height: '24px', objectFit: 'contain' }} />
                             </div>
                         </div>
                     </div>
 
                     {/* Column 2: Shop Online */}
-                    <div>
-                        <h4 className="text-gray-900 font-bold text-sm tracking-widest uppercase mb-6">Shop Online</h4>
-                        <ul className="space-y-3 text-sm">
+                    <div className="col-12 col-md-6 col-lg-3">
+                        <h4 className="text-dark fw-bold small text-uppercase tracking-widest mb-4">Shop Online</h4>
+                        <ul className="list-unstyled small space-y-2">
                             {['New Arrivals', 'Banarasi Sarees', 'Designer Lehengas', 'Party Wear Suits', 'Festive Collection', 'Sale'].map((item) => (
-                                <li key={item}>
-                                    <a href="#" className="hover:text-brand-pink transition-colors duration-200 hover:translate-x-1 inline-block">
+                                <li key={item} className="mb-2">
+                                    <a href="#" className="text-decoration-none text-secondary hover-text-brand-pink transition-all">
                                         {item}
                                     </a>
                                 </li>
@@ -59,12 +57,12 @@ const Footer: React.FC = () => {
                     </div>
 
                     {/* Column 3: Customer Care */}
-                    <div>
-                        <h4 className="text-gray-900 font-bold text-sm tracking-widest uppercase mb-6">Customer Care</h4>
-                        <ul className="space-y-3 text-sm">
+                    <div className="col-12 col-md-6 col-lg-3">
+                        <h4 className="text-dark fw-bold small text-uppercase tracking-widest mb-4">Customer Care</h4>
+                        <ul className="list-unstyled small">
                             {['Track Order', 'Return & Exchange', 'Shipping Policy', 'Terms & Conditions', 'Privacy Policy', 'Contact Us'].map((item) => (
-                                <li key={item}>
-                                    <a href="#" className="hover:text-brand-pink transition-colors duration-200 hover:translate-x-1 inline-block">
+                                <li key={item} className="mb-2">
+                                    <a href="#" className="text-decoration-none text-secondary hover-text-brand-pink transition-all">
                                         {item}
                                     </a>
                                 </li>
@@ -73,37 +71,38 @@ const Footer: React.FC = () => {
                     </div>
 
                     {/* Column 4: Stay Connected */}
-                    <div>
-                        <h4 className="text-gray-900 font-bold text-sm tracking-widest uppercase mb-6">Stay Connected</h4>
-                        <p className="text-sm mb-4">
+                    <div className="col-12 col-md-6 col-lg-3">
+                        <h4 className="text-dark fw-bold small text-uppercase tracking-widest mb-4">Stay Connected</h4>
+                        <p className="small mb-4 text-secondary">
                             Subscribe to get exclusive offers and new launch updates.
                         </p>
 
                         {/* Newsletter Form */}
-                        <div className="flex mb-8">
+                        <div className="input-group mb-4">
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="bg-white border border-gray-300 border-r-0 px-4 py-2 w-full text-sm outline-none focus:border-brand-pink transition-colors"
+                                className="form-control border-secondary-subtle font-small"
+                                style={{ fontSize: '0.875rem' }}
                             />
-                            <button className="bg-brand-pink text-white px-6 py-2 text-xs font-bold tracking-wider hover:bg-pink-700 transition-colors uppercase">
+                            <button className="btn bg-brand-pink text-white small fw-bold text-uppercase px-3 hover-bg-pink-dark">
                                 Join
                             </button>
                         </div>
 
                         {/* Contact Info */}
-                        <div className="space-y-4 text-sm">
-                            <div className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-brand-pink shrink-0 mt-0.5" />
+                        <div className="small text-secondary space-y-3">
+                            <div className="d-flex align-items-start gap-3 mb-2">
+                                <MapPin size={18} className="text-brand-pink flex-shrink-0 mt-1" />
                                 <span>D-200, Omicron-2, Greater Noida, Uttar Pradesh - 201310</span>
                             </div>
-                            <div className="flex items-center gap-3">
-                                <Phone className="w-4 h-4 text-brand-pink shrink-0" />
-                                <a href="tel:+919211388816" className="hover:text-brand-pink transition-colors">+91 9211388816</a>
+                            <div className="d-flex align-items-center gap-3 mb-2">
+                                <Phone size={16} className="text-brand-pink flex-shrink-0" />
+                                <a href="tel:+919211388816" className="text-decoration-none text-secondary hover-text-brand-pink">+91 9211388816</a>
                             </div>
-                            <div className="flex items-center gap-3">
-                                <Mail className="w-4 h-4 text-brand-pink shrink-0" />
-                                <a href="mailto:gg.enterprises200@gmail.com" className="hover:text-brand-pink transition-colors">gg.enterprises200@gmail.com</a>
+                            <div className="d-flex align-items-center gap-3">
+                                <Mail size={16} className="text-brand-pink flex-shrink-0" />
+                                <a href="mailto:gg.enterprises200@gmail.com" className="text-decoration-none text-secondary hover-text-brand-pink">gg.enterprises200@gmail.com</a>
                             </div>
                         </div>
                     </div>
@@ -111,18 +110,18 @@ const Footer: React.FC = () => {
                 </div>
 
                 {/* Divider */}
-                <div className="border-t border-gray-200 my-8"></div>
+                <hr className="my-4 text-secondary opacity-25" />
 
                 {/* Popular Searches (SEO) */}
-                <div className="text-center mb-8">
-                    <h5 className="text-[10px] font-bold text-gray-800 uppercase tracking-wider mb-2">Popular Searches:</h5>
-                    <p className="text-[10px] text-gray-500 leading-loose">
+                <div className="text-center mb-4">
+                    <h5 className="small fw-bold text-dark text-uppercase tracking-wider mb-2" style={{ fontSize: '10px' }}>Popular Searches:</h5>
+                    <p className="text-muted lh-lg" style={{ fontSize: '10px' }}>
                         Banarasi Silk Sarees | Georgette Party Wear | Wedding Lehengas | Indian Ethnic Wear Online | Buy Sarees in Noida | Designer Suits for Women | Festive Kurtis | Bridal Trousseau | Handloom Silk Sarees | GG Fashion Greater Noida | Bollywood Replica Sarees | Sangeet Outfits | Haldi Ceremony Dress
                     </p>
                 </div>
 
                 {/* Copyright */}
-                <div className="text-center text-xs text-gray-400">
+                <div className="text-center small text-muted" style={{ fontSize: '0.75rem' }}>
                     © 2026 GG Fashion. All Rights Reserved.
                 </div>
             </div>

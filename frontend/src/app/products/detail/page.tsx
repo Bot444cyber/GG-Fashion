@@ -19,60 +19,62 @@ export default function ProductDetailPage() {
     ];
 
     return (
-        <div className="container mx-auto px-4 py-6 bg-white min-h-screen">
+        <div className="container py-4 min-vh-100 bg-white">
 
             {/* Top Notification Banner */}
-            <div className="bg-pink-50 text-center py-2 px-4 mb-6 rounded-sm border border-pink-100">
-                <p className="text-[10px] md:text-xs font-medium text-gray-700">
-                    For styling assistance & customizations, WhatsApp us at: <span className="font-bold text-brand-pink underline">+91-9372999910</span>
+            <div className="alert alert-danger bg-pink-50 text-center py-2 mb-4 rounded-0 border border-pink-subtle">
+                <p className="small fw-medium text-secondary mb-0" style={{ fontSize: '0.75rem' }}>
+                    For styling assistance & customizations, WhatsApp us at: <span className="fw-bold text-brand-pink text-decoration-underline">+91-9372999910</span>
                 </p>
             </div>
 
             {/* Breadcrumb */}
-            <div className="text-[10px] md:text-xs text-gray-500 mb-8 font-medium tracking-wide">
-                <Link href="/" className="cursor-pointer hover:text-brand-pink transition-colors">Home</Link>
+            <div className="d-flex align-items-center small text-secondary mb-4 fw-medium tracking-wide" style={{ fontSize: '0.75rem' }}>
+                <Link href="/" className="text-decoration-none text-secondary hover-text-brand-pink transition-colors">Home</Link>
                 <span className="mx-2">/</span>
-                <Link href="/products" className="cursor-pointer hover:text-brand-pink transition-colors">Sarees</Link>
+                <Link href="/products" className="text-decoration-none text-secondary hover-text-brand-pink transition-colors">Sarees</Link>
                 <span className="mx-2">/</span>
-                <span className="text-gray-900">Party Wear</span>
+                <span className="text-dark">Party Wear</span>
             </div>
 
             {/* Main Content Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-20">
+            <div className="row g-4 g-lg-5 mb-5 pb-5">
                 {/* Gallery - 7 cols */}
-                <div className="lg:col-span-7">
+                <div className="col-12 col-lg-7">
                     <ProductGallery images={images} />
                 </div>
 
                 {/* Info - 5 cols */}
-                <div className="lg:col-span-5">
+                <div className="col-12 col-lg-5">
                     <ProductInfo />
                 </div>
             </div>
 
             {/* Similar Collection */}
-            <div className="mb-20">
-                <div className="flex items-center justify-between mb-8">
-                    <h3 className="font-sans text-2xl md:text-3xl text-gray-800">
-                        Similar <span className="text-brand-pink font-bold">Collection</span>
+            <div className="mb-5 pb-5">
+                <div className="d-flex align-items-center justify-content-between mb-4">
+                    <h3 className="h3 font-sans text-dark mb-0">
+                        Similar <span className="text-brand-pink fw-bold">Collection</span>
                     </h3>
-                    <Link href="/products" className="text-xs font-bold underline decoration-1 underline-offset-4 cursor-pointer text-gray-500 hover:text-brand-pink uppercase tracking-widest">
+                    <Link href="/products" className="small fw-bold text-decoration-underline text-secondary hover-text-brand-pink text-uppercase tracking-widest" style={{ fontSize: '0.75rem' }}>
                         VIEW ALL PRODUCTS
                     </Link>
                 </div>
 
-                <div className="relative group">
+                <div className="position-relative group">
                     {/* Nav Buttons */}
-                    <button className="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-brand-pink hover:text-white transition-colors z-10 opacity-0 group-hover:opacity-100">
-                        <ChevronLeft className="w-5 h-5" />
+                    <button className="position-absolute start-0 top-50 translate-middle-y ms-n3 btn btn-light rounded-circle shadow d-none d-md-flex align-items-center justify-content-center opacity-0 group-hover-opacity-100 transition-all z-2" style={{ width: '40px', height: '40px', left: '-20px' }}>
+                        <ChevronLeft size={20} />
                     </button>
-                    <button className="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-brand-pink text-white rounded-full flex items-center justify-center transition-colors z-10 shadow-lg shadow-pink-200 opacity-0 group-hover:opacity-100">
-                        <ChevronRight className="w-5 h-5" />
+                    <button className="position-absolute end-0 top-50 translate-middle-y me-n3 btn btn-primary bg-brand-pink border-0 rounded-circle shadow-lg shadow-pink-200 d-none d-md-flex align-items-center justify-content-center opacity-0 group-hover-opacity-100 transition-all z-2" style={{ width: '40px', height: '40px', right: '-20px' }}>
+                        <ChevronRight size={20} />
                     </button>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="row row-cols-2 row-cols-md-4 g-3">
                         {FEATURED_COLLECTION.slice(0, 4).map((product) => (
-                            <ProductCard key={product.id} product={product} />
+                            <div key={product.id} className="col">
+                                <ProductCard product={product} />
+                            </div>
                         ))}
                     </div>
                 </div>

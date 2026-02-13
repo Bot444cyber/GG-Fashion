@@ -30,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${interTight.variable} ${playfair.variable} antialiased`}>
-        <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-brand-pink selection:text-white flex flex-col">
+        <div className="min-vh-100 bg-white d-flex flex-column font-sans text-dark">
           <TopBar />
           <Header />
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow-1">{children}</main>
           <Footer />
         </div>
       </body>

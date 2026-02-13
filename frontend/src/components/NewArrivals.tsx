@@ -22,82 +22,85 @@ const NewArrivals: React.FC = () => {
     };
 
     return (
-        <section className="py-16 bg-white border-b border-gray-100">
-            <div className="container mx-auto px-4">
+        <section className="py-5 bg-white border-bottom">
+            <div className="container">
 
                 {/* Header */}
-                <div className="flex flex-row items-center justify-between mb-8">
-                    <h3 className="font-sans text-2xl md:text-3xl text-gray-800">
-                        New <span className="text-brand-pink font-bold">Arrivals</span>
+                <div className="d-flex align-items-center justify-content-between mb-4">
+                    <h3 className="h3 font-sans text-dark mb-0">
+                        New <span className="text-brand-pink fw-bold">Arrivals</span>
                     </h3>
                     <Link
                         href="/products"
-                        className="border border-gray-200 bg-gray-50 px-4 py-2 rounded-full text-[10px] md:text-xs font-bold text-gray-900 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all uppercase tracking-widest whitespace-nowrap"
+                        className="btn btn-light border rounded-pill px-4 py-2 small fw-bold text-uppercase text-nowrap text-dark hover-bg-brand-pink hover-text-white transition-all"
+                        style={{ fontSize: '0.75rem', letterSpacing: '1px' }}
                     >
                         View All
                     </Link>
                 </div>
 
                 {/* Carousel Container */}
-                <div className="relative group">
+                <div className="position-relative group">
 
                     {/* Left Navigation Button */}
                     <button
                         onClick={() => scroll('left')}
-                        className="hidden md:flex absolute left-0 top-[40%] -translate-y-1/2 -translate-x-3 md:-translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 bg-gray-100/90 rounded-full items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition-all duration-300 shadow-md opacity-0 group-hover:opacity-100 disabled:opacity-0"
+                        className="btn btn-light rounded-circle shadow position-absolute start-0 top-50 translate-middle-y z-10 d-none d-md-flex align-items-center justify-content-center opacity-0 group-hover-opacity-100 transition-opacity duration-300 ms-n3"
+                        style={{ width: '48px', height: '48px' }}
                         aria-label="Previous products"
                     >
-                        <ChevronLeft className="w-6 h-6" />
+                        <ChevronLeft size={24} />
                     </button>
 
                     {/* Product Cards Row */}
                     <div
                         ref={scrollRef}
-                        className="flex gap-4 md:gap-6 overflow-x-auto pb-8 pt-2 px-1 snap-x snap-mandatory no-scrollbar"
+                        className="d-flex gap-4 overflow-auto pb-4 pt-2 px-1 scroll-smooth no-scrollbar"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {NEW_ARRIVALS.map((product) => (
                             <div
                                 key={product.id}
-                                className="flex-none w-[160px] md:w-[280px] snap-start group/card relative"
+                                className="flex-shrink-0 position-relative group-card"
+                                style={{ width: '280px' }}
                             >
-                                <Link href="/products/detail" className="block">
+                                <Link href="/products/detail" className="d-block text-decoration-none">
                                     {/* Image Area */}
-                                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg mb-3 md:mb-4 bg-gray-100">
+                                    <div className="position-relative ratio ratio-3x4 overflow-hidden rounded mb-3 bg-light">
                                         <img
                                             src={product.image}
                                             alt={product.title}
-                                            className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover/card:scale-105"
+                                            className="w-100 h-100 object-fit-cover transition-transform duration-700 hover-scale-105"
                                         />
 
                                         {/* Quick View Overlay (Desktop only) */}
-                                        <div className="hidden md:flex absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 justify-center pb-6 bg-gradient-to-t from-black/20 to-transparent">
-                                            <span className="bg-white text-gray-900 text-xs font-bold py-2 px-6 rounded shadow-lg uppercase tracking-wider hover:bg-brand-pink hover:text-white transition-colors">
+                                        <div className="d-none d-md-flex position-absolute bottom-0 start-0 w-100 p-3 opacity-0 group-card-hover-opacity-100 transition-opacity duration-300 justify-content-center bg-gradient-to-t-black-20">
+                                            <span className="btn btn-white text-dark small fw-bold text-uppercase px-4 py-2 rounded shadow hover-bg-brand-pink hover-text-white transition-colors">
                                                 Quick View
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* Product Details */}
-                                    <div className="space-y-1">
-                                        <div className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                                    <div className="vstack gap-1">
+                                        <div className="small fw-bold text-muted text-uppercase tracking-wider" style={{ fontSize: '10px' }}>
                                             {product.brand}
                                         </div>
-                                        <h4 className="text-xs md:text-sm text-gray-800 font-medium leading-tight line-clamp-2 min-h-[2.5em] group-hover/card:text-brand-pink transition-colors">
+                                        <h4 className="h6 fw-bold text-dark lh-sm line-clamp-2 mb-0 hover-text-brand-pink transition-colors">
                                             {product.title}
                                         </h4>
 
-                                        <div className="flex items-center gap-2 mt-2">
-                                            <span className="text-sm md:text-lg font-bold text-gray-900">
+                                        <div className="d-flex align-items-center gap-2 mt-1">
+                                            <span className="fw-bold text-dark">
                                                 {product.price}
                                             </span>
                                             {product.originalPrice && (
-                                                <span className="text-[10px] md:text-xs text-gray-400 line-through decoration-gray-400/60">
+                                                <span className="small text-muted text-decoration-line-through decoration-muted" style={{ fontSize: '0.75rem' }}>
                                                     {product.originalPrice}
                                                 </span>
                                             )}
                                             {product.discount && (
-                                                <span className="text-[10px] md:text-xs font-bold text-brand-pink">
+                                                <span className="small fw-bold text-brand-pink" style={{ fontSize: '0.75rem' }}>
                                                     {product.discount}
                                                 </span>
                                             )}
@@ -105,9 +108,11 @@ const NewArrivals: React.FC = () => {
                                     </div>
                                 </Link>
 
-                                {/* Wishlist Button (Outside Link to avoid nesting, positioned absolutely) */}
-                                <button className="absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-gray-600 hover:text-brand-pink hover:bg-white transition-all duration-200 shadow-sm z-10">
-                                    <Heart className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                                {/* Wishlist Button */}
+                                <button className="btn btn-light bg-white-80 backdrop-blur-sm rounded-circle position-absolute top-0 end-0 m-3 p-0 shadow-sm d-flex align-items-center justify-content-center text-secondary hover-text-brand-pink hover-bg-white transition-all z-10"
+                                    style={{ width: '32px', height: '32px' }}
+                                >
+                                    <Heart size={16} />
                                 </button>
                             </div>
                         ))}
@@ -116,10 +121,11 @@ const NewArrivals: React.FC = () => {
                     {/* Right Navigation Button */}
                     <button
                         onClick={() => scroll('right')}
-                        className="absolute right-0 top-[40%] -translate-y-1/2 translate-x-3 md:translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 bg-brand-pink rounded-full flex items-center justify-center text-white shadow-lg shadow-pink-200 hover:bg-pink-600 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                        className="btn btn-primary bg-brand-pink border-0 rounded-circle shadow position-absolute end-0 top-50 translate-middle-y z-10 d-none d-md-flex align-items-center justify-content-center opacity-0 group-hover-opacity-100 transition-opacity duration-300 me-n3 hover-scale-110"
+                        style={{ width: '48px', height: '48px' }}
                         aria-label="Next products"
                     >
-                        <ChevronRight className="w-6 h-6" />
+                        <ChevronRight size={24} />
                     </button>
 
                 </div>

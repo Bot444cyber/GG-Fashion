@@ -11,35 +11,40 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     return (
-        <div className="group relative">
-            <Link href="/products/detail">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-sm bg-gray-100 mb-4">
+        <div className="position-relative group">
+            <Link href="/products/detail" className="d-block">
+                <div className="position-relative ratio ratio-3x4 overflow-hidden rounded mb-3 bg-light">
                     <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                        className="w-100 h-100 object-fit-cover transition-transform duration-700 hover-scale-105"
                     />
                 </div>
             </Link>
 
-            <button className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-gray-500 hover:text-brand-pink hover:bg-white transition-all shadow-sm z-10">
-                <Heart className="w-4 h-4 stroke-2" />
+            <button className="btn btn-light bg-white-80 backdrop-blur-sm rounded-circle position-absolute top-0 end-0 m-2 p-0 d-flex align-items-center justify-content-center text-secondary hover-text-brand-pink hover-bg-white shadow-sm z-1"
+                style={{ width: '32px', height: '32px' }}
+            >
+                <Heart size={16} />
             </button>
 
-            <Link href="/products/detail" className="block space-y-1">
+            <Link href="/products/detail" className="d-block text-decoration-none vstack gap-1">
                 {product.fabric && (
-                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">
+                    <p className="text-muted fw-bold text-uppercase tracking-widest mb-1" style={{ fontSize: '10px' }}>
                         FABRIC: {product.fabric}
                     </p>
                 )}
-                <h5 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest hidden">{product.brand}</h5>
-                <h3 className="text-sm font-medium text-gray-900 leading-snug group-hover:text-brand-pink transition-colors line-clamp-2 min-h-[1.2em]">
+                {/* Brand hidden as per original */}
+                <h5 className="text-muted fw-bold text-uppercase tracking-widest d-none" style={{ fontSize: '10px' }}>{product.brand}</h5>
+
+                <h3 className="h6 fw-bold text-dark lh-sm line-clamp-2 group-hover-text-brand-pink transition-colors" style={{ minHeight: '2.5rem' }}>
                     {product.title}
                 </h3>
-                <div className="flex items-center gap-2 pt-1">
-                    <span className="text-lg font-bold text-gray-900">{product.price}</span>
-                    {product.originalPrice && <span className="text-xs text-gray-400 line-through decoration-gray-400/60">{product.originalPrice}</span>}
-                    {product.discount && <span className="text-xs font-bold text-brand-pink">{product.discount}</span>}
+
+                <div className="d-flex align-items-center gap-2 mt-1">
+                    <span className="fw-bold text-dark fs-6">{product.price}</span>
+                    {product.originalPrice && <span className="small text-muted text-decoration-line-through decoration-muted" style={{ fontSize: '0.75rem' }}>{product.originalPrice}</span>}
+                    {product.discount && <span className="small fw-bold text-brand-pink" style={{ fontSize: '0.75rem' }}>{product.discount}</span>}
                 </div>
             </Link>
         </div>

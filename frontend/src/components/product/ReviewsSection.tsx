@@ -1,82 +1,84 @@
 'use client';
 
 import React from 'react';
-import { Star, CheckCircle, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Star, CheckCircle, ChevronRight } from 'lucide-react';
 
 const ReviewsSection: React.FC = () => {
     return (
-        <section className="bg-white py-12 md:py-20 border-t border-gray-100">
-            <div className="flex items-center gap-2 mb-8">
-                <h3 className="font-sans text-2xl md:text-3xl text-gray-800">
-                    Ratings & <span className="text-brand-pink font-bold">Reviews</span>
+        <section className="bg-white py-5 border-top">
+            <div className="d-flex align-items-center gap-2 mb-4">
+                <h3 className="h3 font-sans text-dark mb-0">
+                    Ratings & <span className="fw-bold text-brand-pink">Reviews</span>
                 </h3>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="row g-5">
                 {/* Summary Card */}
-                <div className="lg:col-span-4 h-full">
-                    <div className="bg-white border boundary-gray-200 p-8 text-center sticky top-24 rounded-sm shadow-sm">
-                        <div className="text-6xl font-bold text-gray-900 mb-2">4.5</div>
-                        <div className="flex justify-center gap-1 mb-4 text-yellow-400">
-                            {[...Array(4)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
-                            <Star className="w-5 h-5 fill-current text-gray-300" />
+                <div className="col-12 col-lg-4">
+                    <div className="card border p-4 text-center sticky-top shadow-sm" style={{ top: '100px' }}>
+                        <div className="display-4 fw-bold text-dark mb-2">4.5</div>
+                        <div className="d-flex justify-content-center gap-1 mb-3 text-warning">
+                            {[...Array(4)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
+                            <Star size={20} fill="currentColor" className="text-secondary opacity-25" />
                         </div>
-                        <p className="text-sm text-gray-500 mb-8">Based on 14 Reviews</p>
+                        <p className="small text-secondary mb-4">Based on 14 Reviews</p>
 
-                        <button className="w-full border border-gray-300 py-3 text-sm font-medium text-gray-700 hover:border-gray-900 hover:bg-gray-50 transition-colors">
+                        <button className="btn btn-outline-dark w-100 py-2 fw-medium hover-bg-light transition-colors">
                             Write a Review
                         </button>
                     </div>
                 </div>
 
                 {/* Review List */}
-                <div className="lg:col-span-8 space-y-8">
-                    {/* Review 1 */}
-                    <div className="border-b border-gray-100 pb-8">
-                        <div className="flex justify-between items-start mb-2">
-                            <div>
-                                <h4 className="font-bold text-gray-900 text-sm">Hetal Shah</h4>
-                                <div className="flex items-center gap-1 text-green-600">
-                                    <CheckCircle className="w-3 h-3" />
-                                    <span className="text-[10px] font-bold uppercase tracking-wider">Verified Buyer</span>
+                <div className="col-12 col-lg-8">
+                    <div className="vstack gap-4">
+                        {/* Review 1 */}
+                        <div className="border-bottom pb-4">
+                            <div className="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h4 className="fw-bold text-dark small mb-1">Hetal Shah</h4>
+                                    <div className="d-flex align-items-center gap-1 text-success">
+                                        <CheckCircle size={12} />
+                                        <span className="tiny fw-bold text-uppercase tracking-wider" style={{ fontSize: '10px' }}>Verified Buyer</span>
+                                    </div>
                                 </div>
+                                <span className="small text-muted">Feb 14, 2026</span>
                             </div>
-                            <span className="text-xs text-gray-400">Feb 14, 2026</span>
+                            <div className="d-flex gap-1 text-warning mb-2">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={12} fill="currentColor" />)}
+                            </div>
+                            <p className="small text-secondary lh-base mb-0">
+                                "Beautiful dress, perfect size. I ordered for my sister's wedding and it arrived on time. The fabric quality is exceptional."
+                            </p>
                         </div>
-                        <div className="flex gap-1 text-yellow-400 mb-3">
-                            {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
-                        </div>
-                        <p className="text-sm text-gray-600 leading-relaxed">
-                            "Beautiful dress, perfect size. I ordered for my sister's wedding and it arrived on time. The fabric quality is exceptional."
-                        </p>
-                    </div>
 
-                    {/* Review 2 */}
-                    <div className="border-b border-gray-100 pb-8">
-                        <div className="flex justify-between items-start mb-2">
-                            <div>
-                                <h4 className="font-bold text-gray-900 text-sm">Indu Valavala</h4>
-                                <div className="flex items-center gap-1 text-green-600">
-                                    <CheckCircle className="w-3 h-3" />
-                                    <span className="text-[10px] font-bold uppercase tracking-wider">Verified Buyer</span>
+                        {/* Review 2 */}
+                        <div className="border-bottom pb-4">
+                            <div className="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h4 className="fw-bold text-dark small mb-1">Indu Valavala</h4>
+                                    <div className="d-flex align-items-center gap-1 text-success">
+                                        <CheckCircle size={12} />
+                                        <span className="tiny fw-bold text-uppercase tracking-wider" style={{ fontSize: '10px' }}>Verified Buyer</span>
+                                    </div>
                                 </div>
+                                <span className="small text-muted">Feb 02, 2026</span>
                             </div>
-                            <span className="text-xs text-gray-400">Feb 02, 2026</span>
+                            <div className="d-flex gap-1 text-warning mb-2">
+                                {[...Array(5)].map((_, i) => <Star key={i} size={12} fill="currentColor" />)}
+                            </div>
+                            <p className="small text-secondary lh-base mb-0">
+                                "This is my second jewelry order from GG Fashion. I loved them both. They arrived well packed and exactly as shown in pictures."
+                            </p>
                         </div>
-                        <div className="flex gap-1 text-yellow-400 mb-3">
-                            {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
-                        </div>
-                        <p className="text-sm text-gray-600 leading-relaxed">
-                            "This is my second jewelry order from GG Fashion. I loved them both. They arrived well packed and exactly as shown in pictures."
-                        </p>
-                    </div>
 
-                    {/* Pagination */}
-                    <div className="flex justify-end gap-2 mt-8">
-                        <button className="w-8 h-8 flex items-center justify-center bg-brand-pink text-white text-xs font-bold rounded-sm">1</button>
-                        <button className="w-8 h-8 flex items-center justify-center border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs font-bold rounded-sm">2</button>
-                        <button className="w-8 h-8 flex items-center justify-center border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs font-bold rounded-sm">3</button>
-                        <button className="w-8 h-8 flex items-center justify-center border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs font-bold rounded-sm"><ChevronRight className="w-3 h-3" /></button>
+                        {/* Pagination */}
+                        <div className="d-flex justify-content-end gap-2 mt-2">
+                            <button className="btn btn-sm btn-brand-pink text-white fw-bold d-flex align-items-center justify-content-center p-0 rounded-sm" style={{ width: '32px', height: '32px' }}>1</button>
+                            <button className="btn btn-sm btn-outline-secondary text-secondary fw-bold d-flex align-items-center justify-content-center p-0 rounded-sm hover-bg-light" style={{ width: '32px', height: '32px' }}>2</button>
+                            <button className="btn btn-sm btn-outline-secondary text-secondary fw-bold d-flex align-items-center justify-content-center p-0 rounded-sm hover-bg-light" style={{ width: '32px', height: '32px' }}>3</button>
+                            <button className="btn btn-sm btn-outline-secondary text-secondary fw-bold d-flex align-items-center justify-content-center p-0 rounded-sm hover-bg-light" style={{ width: '32px', height: '32px' }}><ChevronRight size={12} /></button>
+                        </div>
                     </div>
                 </div>
             </div>
