@@ -21,13 +21,6 @@ export default function ProductsPage() {
 
             {/* Header Section */}
             <div className="flex flex-col md:flex-row justify-between items-end md:items-center mb-8 pb-4 border-b border-gray-100">
-                <div>
-                    <h1 className="text-xl md:text-2xl font-serif text-gray-900 mb-1">
-                        Results for <span className="font-bold">"Sarees"</span>
-                    </h1>
-                    <span className="text-xs text-gray-500 font-sans tracking-wide">(142 items)</span>
-                </div>
-
                 {/* Mobile Filter & Sort Buttons */}
                 <div className="mt-4 md:mt-0 flex gap-2 w-full md:w-auto">
                     {/* Mobile Filter Trigger */}

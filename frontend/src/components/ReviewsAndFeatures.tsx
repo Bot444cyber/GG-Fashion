@@ -39,13 +39,13 @@ const ReviewsAndFeatures: React.FC = () => {
                 <div className="container mx-auto px-4">
 
                     {/* Header */}
-                    <div className="flex items-end justify-between mb-8 md:mb-12">
-                        <h3 className="font-sans text-3xl md:text-4xl text-gray-800">
+                    <div className="flex flex-row items-center justify-between mb-8 md:mb-12">
+                        <h3 className="font-sans text-2xl md:text-3xl lg:text-4xl text-gray-800">
                             Reviews & <span className="text-brand-pink font-bold">Ratings</span>
                         </h3>
                         <Link
                             href="/products"
-                            className="text-gray-500 text-xs font-bold underline decoration-1 underline-offset-4 hover:text-brand-pink transition-colors uppercase tracking-widest mb-1"
+                            className="border border-gray-200 bg-gray-50 px-4 py-2 rounded-full text-[10px] md:text-xs font-bold text-gray-900 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all uppercase tracking-widest whitespace-nowrap"
                         >
                             View All
                         </Link>

@@ -26,15 +26,15 @@ const NewArrivals: React.FC = () => {
             <div className="container mx-auto px-4">
 
                 {/* Header */}
-                <div className="flex items-end justify-between mb-8">
-                    <h3 className="font-sans text-3xl text-gray-800">
+                <div className="flex flex-row items-center justify-between mb-8">
+                    <h3 className="font-sans text-2xl md:text-3xl text-gray-800">
                         New <span className="text-brand-pink font-bold">Arrivals</span>
                     </h3>
                     <Link
                         href="/products"
-                        className="text-gray-500 text-xs font-bold underline decoration-1 underline-offset-4 hover:text-brand-pink transition-colors uppercase tracking-widest mb-1"
+                        className="border border-gray-200 bg-gray-50 px-4 py-2 rounded-full text-[10px] md:text-xs font-bold text-gray-900 hover:bg-brand-pink hover:text-white hover:border-brand-pink transition-all uppercase tracking-widest whitespace-nowrap"
                     >
-                        View All Products
+                        View All
                     </Link>
                 </div>
 
@@ -44,7 +44,7 @@ const NewArrivals: React.FC = () => {
                     {/* Left Navigation Button */}
                     <button
                         onClick={() => scroll('left')}
-                        className="absolute left-0 top-[40%] -translate-y-1/2 -translate-x-3 md:-translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 bg-gray-100/90 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition-all duration-300 shadow-md opacity-0 group-hover:opacity-100 disabled:opacity-0"
+                        className="hidden md:flex absolute left-0 top-[40%] -translate-y-1/2 -translate-x-3 md:-translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 bg-gray-100/90 rounded-full items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition-all duration-300 shadow-md opacity-0 group-hover:opacity-100 disabled:opacity-0"
                         aria-label="Previous products"
                     >
                         <ChevronLeft className="w-6 h-6" />
@@ -53,60 +53,62 @@ const NewArrivals: React.FC = () => {
                     {/* Product Cards Row */}
                     <div
                         ref={scrollRef}
-                        className="flex gap-6 overflow-x-auto pb-8 pt-2 px-1 snap-x snap-mandatory no-scrollbar"
+                        className="flex gap-4 md:gap-6 overflow-x-auto pb-8 pt-2 px-1 snap-x snap-mandatory no-scrollbar"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {NEW_ARRIVALS.map((product) => (
                             <div
                                 key={product.id}
-                                className="flex-none w-[260px] md:w-[280px] snap-start group/card cursor-pointer"
+                                className="flex-none w-[160px] md:w-[280px] snap-start group/card relative"
                             >
-                                {/* Image Area */}
-                                <div className="relative aspect-[3/4] overflow-hidden rounded-lg mb-4 bg-gray-100">
-                                    <img
-                                        src={product.image}
-                                        alt={product.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover/card:scale-105"
-                                    />
+                                <Link href="/products/detail" className="block">
+                                    {/* Image Area */}
+                                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg mb-3 md:mb-4 bg-gray-100">
+                                        <img
+                                            src={product.image}
+                                            alt={product.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover/card:scale-105"
+                                        />
 
-                                    {/* Wishlist Button */}
-                                    <button className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-gray-600 hover:text-brand-pink hover:bg-white transition-all duration-200 shadow-sm z-10">
-                                        <Heart className="w-4 h-4" />
-                                    </button>
-
-                                    {/* Quick View Overlay (Optional, adds professional feel) */}
-                                    <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex justify-center pb-6 bg-gradient-to-t from-black/20 to-transparent">
-                                        <button className="bg-white text-gray-900 text-xs font-bold py-2 px-6 rounded shadow-lg uppercase tracking-wider hover:bg-brand-pink hover:text-white transition-colors">
-                                            Quick View
-                                        </button>
-                                    </div>
-                                </div>
-
-                                {/* Product Details */}
-                                <div className="space-y-1">
-                                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-                                        {product.brand}
-                                    </div>
-                                    <h4 className="text-sm text-gray-800 font-medium leading-tight line-clamp-2 min-h-[2.5em] group-hover/card:text-brand-pink transition-colors">
-                                        {product.title}
-                                    </h4>
-
-                                    <div className="flex items-center gap-2 mt-2">
-                                        <span className="text-lg font-bold text-gray-900">
-                                            {product.price}
-                                        </span>
-                                        {product.originalPrice && (
-                                            <span className="text-xs text-gray-400 line-through decoration-gray-400/60">
-                                                {product.originalPrice}
+                                        {/* Quick View Overlay (Desktop only) */}
+                                        <div className="hidden md:flex absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 justify-center pb-6 bg-gradient-to-t from-black/20 to-transparent">
+                                            <span className="bg-white text-gray-900 text-xs font-bold py-2 px-6 rounded shadow-lg uppercase tracking-wider hover:bg-brand-pink hover:text-white transition-colors">
+                                                Quick View
                                             </span>
-                                        )}
-                                        {product.discount && (
-                                            <span className="text-xs font-bold text-brand-pink">
-                                                {product.discount}
-                                            </span>
-                                        )}
+                                        </div>
                                     </div>
-                                </div>
+
+                                    {/* Product Details */}
+                                    <div className="space-y-1">
+                                        <div className="text-[9px] md:text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                                            {product.brand}
+                                        </div>
+                                        <h4 className="text-xs md:text-sm text-gray-800 font-medium leading-tight line-clamp-2 min-h-[2.5em] group-hover/card:text-brand-pink transition-colors">
+                                            {product.title}
+                                        </h4>
+
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <span className="text-sm md:text-lg font-bold text-gray-900">
+                                                {product.price}
+                                            </span>
+                                            {product.originalPrice && (
+                                                <span className="text-[10px] md:text-xs text-gray-400 line-through decoration-gray-400/60">
+                                                    {product.originalPrice}
+                                                </span>
+                                            )}
+                                            {product.discount && (
+                                                <span className="text-[10px] md:text-xs font-bold text-brand-pink">
+                                                    {product.discount}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </Link>
+
+                                {/* Wishlist Button (Outside Link to avoid nesting, positioned absolutely) */}
+                                <button className="absolute top-2 right-2 md:top-3 md:right-3 w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-gray-600 hover:text-brand-pink hover:bg-white transition-all duration-200 shadow-sm z-10">
+                                    <Heart className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                                </button>
                             </div>
                         ))}
                     </div>
