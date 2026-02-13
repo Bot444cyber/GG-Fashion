@@ -45,12 +45,14 @@ export default function ProductsPage() {
                 </div>
             </div>
 
-            <div className="d-flex flex-column flex-lg-row gap-4 gap-lg-5">
+            <div className="row g-4 g-lg-5">
                 {/* Sidebar Filters */}
-                <FilterSidebar isOpen={isMobileFilterOpen} onClose={() => setIsMobileFilterOpen(false)} />
+                <div className="col-lg-3">
+                    <FilterSidebar isOpen={isMobileFilterOpen} onClose={() => setIsMobileFilterOpen(false)} />
+                </div>
 
                 {/* Product Grid */}
-                <div className="flex-grow-1">
+                <div className="col-lg-9">
                     <div className="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3 g-lg-4">
                         {SEARCH_RESULTS_DATA.map((product) => (
                             <div key={product.id} className="col">

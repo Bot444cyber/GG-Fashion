@@ -172,8 +172,8 @@ const ProductInfo: React.FC = () => {
                 </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="d-flex gap-3 pt-2">
+            {/* Desktop Action Buttons */}
+            <div className="d-none d-md-flex gap-3 pt-2">
                 <button className="btn btn-primary bg-brand-pink border-0 flex-grow-1 py-3 fw-bold text-uppercase tracking-widest shadow hover-bg-pink-dark">
                     Buy Now
                 </button>
@@ -181,6 +181,19 @@ const ProductInfo: React.FC = () => {
                     <ShoppingBag size={20} />
                     Add to Cart
                 </button>
+            </div>
+
+            {/* Mobile Fixed Bottom Action Bar */}
+            <div className="fixed-bottom d-md-none bg-white border-top p-2 shadow-lg" style={{ zIndex: 1030 }}>
+                <div className="d-flex gap-2">
+                    <button className="btn btn-outline-dark flex-grow-1 py-2 fw-bold text-uppercase tracking-widest d-flex align-items-center justify-content-center gap-2 small">
+                        <ShoppingBag size={18} />
+                        Add to Cart
+                    </button>
+                    <button className="btn btn-primary bg-brand-pink border-0 flex-grow-1 py-2 fw-bold text-uppercase tracking-widest shadow-sm small">
+                        Buy Now
+                    </button>
+                </div>
             </div>
 
             {/* Delivery Check */}

@@ -83,6 +83,9 @@ export default function ProductDetailPage() {
             {/* Reviews */}
             <ReviewsSection />
 
+            {/* Mobile Bottom Spacer for Sticky Action Bar */}
+            <div className="d-md-none" style={{ height: '80px' }}></div>
+
         </div>
     );
 }

@@ -39,6 +39,12 @@ const FeaturedCollection: React.FC = () => {
                     </Link>
                 </div>
 
+                {/* Mobile Swipe Indicator */}
+                <div className="d-md-none d-flex align-items-center justify-content-end mb-2 text-muted small animate-swipe-hint">
+                    <span className="me-1" style={{ fontSize: '0.75rem' }}>Slide to see more</span>
+                    <ChevronRight size={16} />
+                </div>
+
                 {/* Carousel Container */}
                 <div className="position-relative group">
 

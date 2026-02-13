@@ -30,19 +30,21 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ isOpen = false, onClose }
             {/* Mobile Backdrop */}
             {isOpen && (
                 <div
-                    className="position-fixed top-0 start-0 w-100 h-100 bg-black-50 z-3 d-lg-none"
+                    className="position-fixed top-0 start-0 w-100 h-100 bg-black-50 d-lg-none"
+                    style={{ zIndex: 1040 }}
                     onClick={onClose}
                 />
             )}
 
             {/* Sidebar Container */}
             <aside className={`
-                position-fixed top-0 start-0 bottom-0 z-3 bg-white px-4 py-4 shadow-lg overflow-auto
+                bg-white px-4 py-4 shadow-lg overflow-auto
                 transition-transform duration-300 ease-in-out
                 d-lg-block shadow-lg-none transform-none
-                ${isOpen ? 'translate-x-0' : '-translate-x-full lg-translate-x-0'}
+                sidebar-responsive
+                ${isOpen ? 'sidebar-open' : 'sidebar-closed'}
             `}
-                style={{ width: '280px', zIndex: 1045 }} // High z-index for mobile, standard for desktop handled by layout
+                style={{ zIndex: 1045 }}
             >
 
                 {/* Mobile Header with Close Button */}
